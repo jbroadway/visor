@@ -28,28 +28,15 @@
 	color: green;
 }
 
-.visor-block .comment {
-	margin-top: -15px;
-	padding-top: 0px;
+.comment {
 	color: #666;
 }
 
-pre, code {
-	border: 1px solid #ddd;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	padding: 0px 2px 2px 2px;
-	background: #f9f9f9;
-	color: #222;
+.visor-block .comment {
+	margin-top: -15px;
+	padding-top: 0px;
 }
 
-	pre code {
-		border: 0px;
-	}
-
-	h3 code {
-		border: 0px;
-		background: transparent;
-		padding: 0px;
-	}
+code {
+	color: #000;
+}

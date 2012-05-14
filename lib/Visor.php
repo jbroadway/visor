@@ -5,6 +5,35 @@
  */
 class Visor {
 	/**
+	 * For now, we're hard-coding our list of libraries.
+	 */
+	public static $libs = array (
+		'Acl',
+		'AppTest',
+		'Cache',
+		'Controller',
+		'DB',
+		'Debugger',
+		'ExtendedModel',
+		'Form',
+		'I18n',
+		'Ini',
+		'Mailer',
+		'MemcacheAPC',
+		'MemcacheExt',
+		'MemcacheRedis',
+		'Model',
+		'MongoManager',
+		'MongoModel',
+		'Page',
+		'Product',
+		'Restful',
+		'Template',
+		'User',
+		'Versions'
+	);
+
+	/**
 	 * Filter a comment for display.
 	 *
 	 * - `$comment` - The comment from `Reflection::getDocComment()`

@@ -1,0 +1,39 @@
+<script>
+$(function ($) {
+	var syntax_root = '/apps/visor/js/jquery-syntax/';
+	if ($('pre>code').length) {
+		$.getScript (syntax_root + 'jquery.syntax.min.js', function () {
+			$.syntax ({root: syntax_root, blockSelector: 'pre>code', blockLayout: 'plain'});
+		});
+	}
+});
+</script>
+
+<div class="comment">{{ class_comment|none }}</div>
+
+<h2>{"Properties"}</h2>
+
+{% if no_properties %}
+<p>{"No properties."}</p>
+{% end %}
+
+{% foreach properties %}
+<div class="visor-block">
+	<h3><code>{{ loop_value['title']|none }}</code></h3>
+	<div class="comment">{{ loop_value['comment']|none }}</div>
+</div>
+{% end %}
+
+
+<h2>{"Methods"}</h2>
+
+{% if no_methods %}
+<p>{"No methods."}</p>
+{% end %}
+
+{% foreach methods %}
+<div class="visor-block">
+	<h3><code>{{ loop_value['title']|none }}</code></h3>
+	<div class="comment">{{ loop_value['comment']|none }}</div>
+</div>
+{% end %}
