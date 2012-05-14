@@ -1,0 +1,55 @@
+.visor-block {
+	border-top: 1px solid #ccc;
+	padding-top: 12px;
+}
+
+.visor-block h3 {
+	font-size: 16px;
+	font-weight: normal;
+}
+
+.modifiers {
+	color: #444;
+}
+
+.property, .method {
+	color: #006aeb;
+}
+
+.properties {
+	color: #444;
+}
+
+.param {
+	color: #ca8a04;
+}
+
+.value {
+	color: green;
+}
+
+.visor-block .comment {
+	margin-top: -15px;
+	padding-top: 0px;
+	color: #666;
+}
+
+pre, code {
+	border: 1px solid #ddd;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	padding: 0px 2px 2px 2px;
+	background: #f9f9f9;
+	color: #222;
+}
+
+	pre code {
+		border: 0px;
+	}
+
+	h3 code {
+		border: 0px;
+		background: transparent;
+		padding: 0px;
+	}
