@@ -49,7 +49,12 @@ class Visor {
 
 		if ($filter === 'markdown') {
 			require_once ('apps/visor/lib/markdown.php');
-			return markdown ($comment);
+			$comment = markdown ($comment);
+			return str_replace (
+				'<pre><code>&lt;',
+				'<pre><code class="brush-html">&lt;',
+				$comment
+			);
 		} elseif (is_callable ($filter)) {
 			return $filter ($comment);
 		}
