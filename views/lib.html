@@ -13,7 +13,7 @@ $(function ($) {
 
 <h2>{"Properties"}</h2>
 
-{% if no_properties %}
+{% if property_count === 0 %}
 <p>{"No properties."}</p>
 {% end %}
 
@@ -27,7 +27,7 @@ $(function ($) {
 
 <h2>{"Methods"}</h2>
 
-{% if no_methods %}
+{% if method_count === 0 %}
 <p>{"No methods."}</p>
 {% end %}
 
