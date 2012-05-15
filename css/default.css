@@ -67,3 +67,23 @@ div.syntax {
 	border: 1px solid #ccc !important;
 	background: #fff !important;
 }
+
+	.syntax-theme-base .syntax .function, .syntax-theme-base .syntax .type {
+		color: #006aeb !important;
+	}
+
+	.syntax-theme-base .syntax .keyword, .syntax-theme-base .syntax .access {
+		color: #444 !important;
+	}
+
+	.syntax-theme-base .syntax .string, .syntax-theme-base .syntax .symbol {
+		color: green !important;
+	}
+
+	.syntax-theme-base .syntax .variable {
+		color: #ca8a04 !important;
+	}
+
+	.syntax-theme-base .syntax .comment {
+		color: #888 !important;
+	}
