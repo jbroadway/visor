@@ -33,6 +33,8 @@ class Visor {
 		'Versions'
 	);
 
+	public static $summaries = null;
+
 	/**
 	 * Remove the wrapping tags from a comment block.
 	 */
@@ -85,7 +87,17 @@ class Visor {
 		// remove newlines
 		$comment = preg_replace ('/[\r\n]+/', ' ', $comment);
 
-		return substr ($comment, 0, strpos ($comment, '.') + 1);
+		// grab the first sentence
+		$desc = substr ($comment, 0, strpos ($comment, '.') + 1);
+
+		// filter out common markup elements
+		$desc = str_replace (
+			array ('[[', ']]', '`'),
+			array ('', '', ''),
+			$desc
+		);
+
+		return $desc;
 	}
 
 	/**
@@ -93,10 +105,14 @@ class Visor {
 	 * and sidebar handlers.
 	 */
 	public static function get_class_summaries () {
-		$summaries = array ();
+		if (self::$summaries !== null) {
+			return self::$summaries;
+		}
+
+		self::$summaries = array ();
 		foreach (self::$libs as $lib) {
 			$ref = new ReflectionClass ($lib);
-			$summaries[$lib] = array (
+			self::$summaries[$lib] = array (
 				'class' => $lib,
 				'description' => self::get_short_description ($ref->getDocComment ()),
 				'list' => array_merge (
@@ -105,7 +121,7 @@ class Visor {
 				)
 			);
 		}
-		return $summaries;
+		return self::$summaries;
 	}
 
 	/**

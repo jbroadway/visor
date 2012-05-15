@@ -15,6 +15,17 @@ if ($parent) {
 	$page->title .= ' extends <a href="/visor/lib/' . $parent->getName () . '">' . $parent->getName () . '</a>';
 }
 
+// caching
+if (! file_exists ('cache/visor')) {
+	mkdir ('cache/visor');
+	chmod (0777, 'cache/visor');
+}
+$cache_file = 'cache/visor/' . $ref->getName () . '.html';
+if (file_exists ($cache_file) && filemtime ($cache_file) >= filemtime ($ref->getFileName ())) {
+	echo file_get_contents ('cache/visor/' . $ref->getName () . '.html');
+	return;
+}
+
 $data = array (
 	'class_comment' => Visor::filter_comment ($ref->getDocComment ()),
 	'property_count' => 0,
@@ -60,6 +71,10 @@ foreach ($ref->getMethods () as $method) {
 	$data['method_count']++;
 }
 
-echo $tpl->render ('visor/lib', $data);
+// render and cache output
+$res = $tpl->render ('visor/lib', $data);
+file_put_contents ('cache/visor/' . $ref->getName () . '.html', $res);
+chmod (0777, 'cache/visor/' . $ref->getName () . '.html');
+echo $res;
 
 ?>
