@@ -5,6 +5,8 @@ $page->add_style ($appconf['Visor']['stylesheet']);
 
 $page->title = i18n_get ('API Documentation');
 
-echo $tpl->render ('visor/index', array ('libs' => Visor::$libs));
+$libs = Visor::get_class_summaries ();
+
+echo $tpl->render ('visor/index', array ('libs' => $libs));
 
 ?>

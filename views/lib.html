@@ -11,6 +11,7 @@ $(function ($) {
 
 <div class="comment">{{ class_comment|none }}</div>
 
+<a name="properties"></a>
 <h2>{"Properties"}</h2>
 
 {% if property_count === 0 %}
@@ -19,12 +20,13 @@ $(function ($) {
 
 {% foreach properties %}
 <div class="visor-block">
+	<a name="property-{{ loop_value['name'] }}"></a>
 	<h3><code>{{ loop_value['title']|none }}</code></h3>
 	<div class="comment">{{ loop_value['comment']|none }}</div>
 </div>
 {% end %}
 
-
+<a name="methods"></a>
 <h2>{"Methods"}</h2>
 
 {% if method_count === 0 %}
@@ -33,6 +35,7 @@ $(function ($) {
 
 {% foreach methods %}
 <div class="visor-block">
+	<a name="method-{{ loop_value['name'] }}"></a>
 	<h3><code>{{ loop_value['title']|none }}</code></h3>
 	<div class="comment">{{ loop_value['comment']|none }}</div>
 </div>

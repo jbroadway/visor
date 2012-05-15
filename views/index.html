@@ -1,7 +1,14 @@
-<p>{"Libraries"}:</p>
-
-<ul>
+<p>
+<table width="100%">
+	<tr class="visor-head">
+		<th width="25%">{"Class"}</th>
+		<th width="75%">{"Description"}</th>
+	</tr>
 {% foreach libs %}
-	<li><a href="/visor/lib/{{ loop_value }}">{{ loop_value }}</a></li>
+	<tr class="visor-class">
+		<td><a href="/visor/lib/{{ loop_value['class'] }}">{{ loop_value['class'] }}</a></td>
+		<td width="70%">{{ loop_value['description'] }}</td>
+	</tr>
 {% end %}
-</ul>
+</table>
+</p>

@@ -34,6 +34,16 @@ class Visor {
 	);
 
 	/**
+	 * Remove the wrapping tags from a comment block.
+	 */
+	public static function remove_comment_tags ($comment) {
+		$comment = preg_replace ('/^\/\*\*?/', '', $comment);
+		$comment = preg_replace ('/\*\/$/', '', $comment);
+		$comment = preg_replace ('/\n[ \t]+?\* ?/', "\n", $comment);
+		return $comment;
+	}
+
+	/**
 	 * Filter a comment for display.
 	 *
 	 * - `$comment` - The comment from `Reflection::getDocComment()`
@@ -43,22 +53,96 @@ class Visor {
 	 */
 	public static function filter_comment ($comment, $filter = 'markdown') {
 		// remove comment symbols
-		$comment = preg_replace ('/^\/\*\*?/', '', $comment);
-		$comment = preg_replace ('/\*\/$/', '', $comment);
-		$comment = preg_replace ('/\n[ \t]+?\* ?/', "\n", $comment);
+		$comment = self::remove_comment_tags ($comment);
 
 		if ($filter === 'markdown') {
 			require_once ('apps/visor/lib/markdown.php');
 			$comment = markdown ($comment);
-			return str_replace (
+			$comment = str_replace (
 				'<pre><code>&lt;',
 				'<pre><code class="brush-html">&lt;',
 				$comment
 			);
+			$comment = preg_replace (
+				'/\[\[([a-zA-Z0-9_]+)\]\]/',
+				'<a href="/visor/lib/\1">\1</a>',
+				$comment
+			);
+			return $comment;
 		} elseif (is_callable ($filter)) {
 			return $filter ($comment);
 		}
 		return $comment;
+	}
+
+	/**
+	 * Gets the first sentence from a documentation block.
+	 */
+	public static function get_short_description ($comment) {
+		// remove comment symbols
+		$comment = self::remove_comment_tags ($comment);
+
+		// remove newlines
+		$comment = preg_replace ('/[\r\n]+/', ' ', $comment);
+
+		return substr ($comment, 0, strpos ($comment, '.') + 1);
+	}
+
+	/**
+	 * Returns a summary of all the classes for use on the index
+	 * and sidebar handlers.
+	 */
+	public static function get_class_summaries () {
+		$summaries = array ();
+		foreach (self::$libs as $lib) {
+			$ref = new ReflectionClass ($lib);
+			$summaries[$lib] = array (
+				'class' => $lib,
+				'description' => self::get_short_description ($ref->getDocComment ()),
+				'list' => array_merge (
+					self::get_properties_summary ($ref),
+					self::get_methods_summary ($ref)
+				)
+			);
+		}
+		return $summaries;
+	}
+
+	/**
+	 * Gets a summary of properties for a class.
+	 */
+	public static function get_properties_summary ($ref) {
+		$out = array ();
+		foreach ($ref->getDefaultProperties () as $name => $value) {
+			$prop = $ref->getProperty ($name);
+			if ($prop->getDeclaringClass ()->getName () !== $ref->name) {
+				continue;
+			}
+			$out[$prop->name] = array (
+				'name' => $prop->name,
+				'display' => '$' . $prop->name,
+				'type' => 'property'
+			);
+		}
+		return $out;
+	}
+
+	/**
+	 * Gets a summary of properties for a class.
+	 */
+	public static function get_methods_summary ($ref) {
+		$out = array ();
+		foreach ($ref->getMethods () as $method) {
+			if ($method->getDeclaringClass ()->getName () !== $ref->name) {
+				continue;
+			}
+			$out[$method->name] = array (
+				'name' => $method->name,
+				'display' => $method->name . '()',
+				'type' => 'method'
+			);
+		}
+		return $out;
 	}
 
 	/**
@@ -87,11 +171,11 @@ class Visor {
 
 		if (is_array ($value)) {
 			$out = $prefix . '<span class="value">array (';
-			$sep = '';
+			/*$sep = '';
 			foreach ($value as $val) {
 				$out .= $sep . self::format_value ($val, '');
 				$sep = ', ';
-			}
+			}*/
 			$out .= ')';
 			return $out;
 		}

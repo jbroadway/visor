@@ -30,6 +30,7 @@ foreach ($ref->getDefaultProperties () as $name => $value) {
 		continue;
 	}
 	$data['properties'][] = array (
+		'name' => $prop->name,
 		'title' => sprintf (
 			'<span class="modifiers">%s</span> <span class="property">$%s</span>%s',
 			implode (' ', Reflection::getModifierNames ($prop->getModifiers ())),
@@ -47,6 +48,7 @@ foreach ($ref->getMethods () as $method) {
 		continue;
 	}
 	$data['methods'][] = array (
+		'name' => $method->name,
 		'title' => sprintf (
 			'<span class="modifiers">%s</span> <span class="method">%s</span> <span class="params">(%s)</span>',
 			implode (' ', Reflection::getModifierNames ($method->getModifiers ())),
