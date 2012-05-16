@@ -18,7 +18,7 @@ if ($parent) {
 // caching
 if (! file_exists ('cache/visor')) {
 	mkdir ('cache/visor');
-	chmod (0777, 'cache/visor');
+	chmod ('cache/visor', 0777);
 }
 $cache_file = 'cache/visor/' . $ref->getName () . '.html';
 if (file_exists ($cache_file) && filemtime ($cache_file) >= filemtime ($ref->getFileName ())) {
@@ -74,7 +74,7 @@ foreach ($ref->getMethods () as $method) {
 // render and cache output
 $res = $tpl->render ('visor/lib', $data);
 file_put_contents ('cache/visor/' . $ref->getName () . '.html', $res);
-chmod (0777, 'cache/visor/' . $ref->getName () . '.html');
+chmod ('cache/visor/' . $ref->getName () . '.html', 0777);
 echo $res;
 
 ?>
