@@ -30,7 +30,8 @@ class Visor {
 		'Restful',
 		'Template',
 		'User',
-		'Versions'
+		'Versions',
+		'View'
 	);
 
 	public static $summaries = null;
@@ -195,6 +196,11 @@ class Visor {
 			$out .= ')';
 			return $out;
 		}
+
+		if (is_object ($value)) {
+			return $prefix . '<span class="value">' . get_class ($value) . '</span>';
+		}
+
 		return $prefix . '<span class="value">\'' . $value . '\'</span>';
 	}
 
