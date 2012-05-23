@@ -1,11 +1,7 @@
+<script src="/apps/visor/js/jquery-syntax/jquery.syntax.min.js"></script>
 <script>
 $(function ($) {
-	var syntax_root = '/apps/visor/js/jquery-syntax/';
-	if ($('pre>code').length) {
-		$.getScript (syntax_root + 'jquery.syntax.min.js', function () {
-			$.syntax ({root: syntax_root, blockSelector: 'pre>code', blockLayout: 'plain'});
-		});
-	}
+	$.syntax ({root: syntax_root, blockSelector: 'pre>code', blockLayout: 'plain'});
 });
 </script>
 
