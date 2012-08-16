@@ -30,6 +30,7 @@ class Visor {
 		'Restful',
 		'Template',
 		'User',
+		'Validator',
 		'Versions',
 		'View'
 	);
