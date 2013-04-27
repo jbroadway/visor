@@ -65,6 +65,10 @@ class Visor {
 		// remove comment symbols
 		$comment = self::remove_comment_tags ($comment);
 
+		// parse @param and @return style elements
+		$comment = preg_replace ('/\n@([a-z0-9_]+)(.*)(\$[a-z0-9_]+)/i', "\n* <code>$1</code><code class='value'>$2</code><code class='param'>$3</code>", $comment);
+		$comment = preg_replace ('/\n@([a-z0-9_]+)([^\n]+)/i', "\n* <code>$1</code><code class='value'>$2</code>", $comment);
+
 		if ($filter === 'markdown') {
 			require_once ('apps/visor/lib/markdown.php');
 			$comment = markdown ($comment);
