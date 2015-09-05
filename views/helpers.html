@@ -1,3 +1,5 @@
+{! admin/util/minimal-grid !}
+
 <p>
 	Helpers are handlers that can be reused in other apps.
 	Helpers are one of the ways Elefant enables reusability
@@ -6,7 +8,7 @@
 
 <p>
 	Helpers can be called via PHP or in templates in the same way
-	that <a href="/docs/2.0/user-manual/dynamic-objects">Dynamic Objects</a>
+	that <a href="/docs/2.0/user-manual/dynamic-objects">dynamic objects</a>
 	can be included in pages and blocks.
 </p>
 
@@ -17,10 +19,18 @@
 	pages.
 </p>
 
-<h3>Helper list</h3>
+<h2>Helpers by app</h2>
 
-<ul>
-{% foreach helpers as helper %}
-	<li><a href="/helper/{{helper}}">{{helper}}</a></li>
+<div class="e-row-variable">
+{% foreach helpers as app %}
+	<div class="e-col-50 e-no-padding-left">
+		<h3>{{app['name']}}</h3>
+
+		<ul>
+			{% foreach app['helpers'] as helper %}
+				<li><a href="/helper/{{helper}}">{{helper}}</a></li>
+			{% end %}
+		</ul>
+	</div>
 {% end %}
-</ul>
+</div>

@@ -297,6 +297,29 @@ class Visor {
 		
 		return trim ($docs);
 	}
+	
+	/**
+	 * Organize helpers by app.
+	 */
+	public static function helpers_by_app ($helpers = null) {
+		$helpers = ($helpers === null) ? self::get_helpers () : $helpers;
+		
+		// Organize by app
+		$by_app = array ();
+		foreach ($helpers as $helper) {
+			list ($app, $handler) = explode ('/', $helper, 2);
+			if (! isset ($by_app[$app])) {
+				$name = Appconf::get ($app, 'Admin', 'name');
+				$by_app[$app] = array (
+					'name' => $name ? $name : $app,
+					'helpers' => array ()
+				);
+			}
+			$by_app[$app]['helpers'][] = $helper;
+		}
+		
+		return $by_app;
+	}
 }
 
 ?>
