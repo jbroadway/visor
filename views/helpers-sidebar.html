@@ -1,0 +1,10 @@
+<ul class="visor-sidebar">
+{% foreach helpers %}
+	{% if loop_value === $data->open %}
+	<li class="visor-open"><a href="/helper/{{ loop_value }}">{{ loop_value }}</a>
+	{% else %}
+	<li><a href="/helper/{{ loop_value }}">{{ loop_value }}</a>
+	{% end %}
+	</li>
+{% end %}
+</ul>

@@ -1,6 +1,6 @@
 <?php
 
-$page->layout = $appconf['Visor']['layout'];
+$page->layout = $appconf['Visor']['helpers_layout'];
 $page->add_style ($appconf['Visor']['stylesheet']);
 
 $helper = join ('/', $this->params);
@@ -16,7 +16,7 @@ $docs = Visor::get_helper_docs ($helper);
 
 if (! $docs) {
 	printf (
-		'<p>%s</p><p><a href="/visor/helpers">%s</a></p>',
+		'<p>%s</p><p><a href="/helpers">%s</a></p>',
 		__ ('No documentation found.'),
 		__ ('Continue')
 	);
