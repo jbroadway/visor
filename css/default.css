@@ -60,6 +60,12 @@ code {
 	color: #000;
 }
 
+hr {
+	border: 0;
+	border-bottom: 3px solid #ccc;
+	margin: 1em 0 1em 0;
+}
+
 div.syntax {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;

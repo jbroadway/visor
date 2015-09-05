@@ -238,6 +238,65 @@ class Visor {
 		}
 		return $out;
 	}
+	
+	/**
+	 * Get a list of valid helpers.
+	 */
+	public static function get_helpers () {
+		$files = glob ('apps/*/handlers/util/*.php');
+		$helpers = array ();
+
+		foreach ($files as $file) {
+			preg_match ('/apps\/(.*)\/handlers\/util\/(.*)\.php$/', $file, $regs);
+			$helpers[sprintf ('%s/util/%s', $regs[1], $regs[2])] = null;
+		}
+
+		$apps = glob ('apps/*/conf/helpers.php');
+
+		foreach ($apps as $file) {
+			$list = parse_ini_file ($file);
+			foreach ($list as $helper => $null) {
+				$helpers[$helper] = null;
+			}
+		}
+
+		ksort ($helpers);
+		return array_keys ($helpers);
+	}
+	
+	/**
+	 * Get docs for a helper.
+	 */
+	public static function get_helper_docs ($helper) {
+		list ($app, $handler) = explode ('/', $helper, 2);
+		$route = 'apps/' . $app . '/handlers/' . $handler . '.php';
+		
+		if (! file_exists ($route)) {
+			return false;
+		}
+		
+		// Get the comment itself
+		$comments = array_filter (
+			token_get_all (file_get_contents ($route)),
+			function ($entry) {
+				return $entry[0] == T_DOC_COMMENT;
+			}
+		);
+
+		$comments = array_shift ($comments);
+		if (! isset ($comments[1])) {
+			return false;
+		}
+
+		$docs = $comments[1];
+
+		// remove comment block tags
+		$docs = preg_replace ('/^\/\*\*?/', '', $docs);
+		$docs = preg_replace ('/\*\/$/', '', $docs);
+		$docs = preg_replace ('/\n[ \t]+?\* ?/', "\n", $docs);
+		
+		return trim ($docs);
+	}
 }
 
 ?>
