@@ -1,14 +1,14 @@
 <ul class="visor-sidebar">
 {% foreach libs %}
 	{% if loop_value['class'] === $data->open %}
-	<li class="visor-open"><a href="/visor/lib/{{ loop_value['class'] }}">{{ loop_value['class'] }}</a>
+	<li class="visor-open"><a href="/api/lib/{{ loop_value['class'] }}">{{ loop_value['class'] }}</a>
 		<ul>
 			{% foreach loop_value['list'] %}
 				<li><a href="#{{ loop_value['type'] }}-{{ loop_value['name'] }}">{{ loop_value['display'] }}</a></li>
 			{% end %}
 		</ul>
 	{% else %}
-	<li><a href="/visor/lib/{{ loop_value['class'] }}">{{ loop_value['class'] }}</a>
+	<li><a href="/api/lib/{{ loop_value['class'] }}">{{ loop_value['class'] }}</a>
 	{% end %}
 	</li>
 {% end %}

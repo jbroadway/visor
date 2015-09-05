@@ -84,7 +84,7 @@ class Visor {
 			);
 			$comment = preg_replace (
 				'/\[\[([a-zA-Z0-9_]+)\]\]/',
-				'<a href="/visor/lib/\1">\1</a>',
+				'<a href="/api/lib/\1">\1</a>',
 				$comment
 			);
 			return $comment;

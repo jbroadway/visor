@@ -12,7 +12,7 @@ $page->title = i18n_get ('Class') . ': ' . $lib;
 
 $parent = $ref->getParentClass ();
 if ($parent) {
-	$page->title .= ' extends <a href="/visor/lib/' . $parent->getName () . '">' . $parent->getName () . '</a>';
+	$page->title .= ' extends <a href="/api/lib/' . $parent->getName () . '">' . $parent->getName () . '</a>';
 }
 
 // caching

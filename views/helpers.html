@@ -1,5 +1,26 @@
+<p>
+	Helpers are handlers that can be reused in other apps.
+	Helpers are one of the ways Elefant enables reusability
+	and creates more composable apps.
+</p>
+
+<p>
+	Helpers can be called via PHP or in templates in the same way
+	that <a href="/docs/2.0/user-manual/dynamic-objects">Dynamic Objects</a>
+	can be included in pages and blocks.
+</p>
+
+<p>
+	For more information about helpers, visit the
+	<a href="/docs/2.0/developers/server-side-helpers">server-side</a>
+	or <a href="/docs/2.0/developers/client-side-helpers">client-side</a>
+	pages.
+</p>
+
+<h3>Helper list</h3>
+
 <ul>
 {% foreach helpers as helper %}
-	<li><a href="/visor/helper/{{helper}}">{{helper}}</a></li>
+	<li><a href="/helper/{{helper}}">{{helper}}</a></li>
 {% end %}
 </ul>

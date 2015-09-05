@@ -17,3 +17,9 @@ I wrote this for a few reasons:
 For a live example of this app in use, visit:
 
 http://api.elefantcms.com/
+
+To make the routes work well, add these to the `[Alias]` section in `conf/routes.php`:
+
+	/api = /visor
+	/helpers = /visor/helpers
+	/helper = /visor/helper

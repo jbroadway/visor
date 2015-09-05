@@ -7,7 +7,7 @@ $helper = join ('/', $this->params);
 $helpers = Visor::get_helpers ();
 
 if (! in_array ($helper, $helpers)) {
-	$this->redirect ('/visor/helpers');
+	$this->redirect ('/helpers');
 }
 
 $page->title = i18n_get ('Helper') . ': ' . Template::sanitize ($helper);
