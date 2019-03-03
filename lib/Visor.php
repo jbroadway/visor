@@ -10,7 +10,6 @@ class Visor {
 	public static $libs = array (
 		'Acl',
 		'Appconf',
-		'AppTest',
 		'Cache',
 		'Cli',
 		'Controller',
