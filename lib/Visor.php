@@ -23,6 +23,7 @@ class Visor {
 		'I18n',
 		'Image',
 		'Ini',
+		'JobQueue',
 		'Link',
 		'Lock',
 		'Mailer',
