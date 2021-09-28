@@ -16,6 +16,7 @@ class Visor {
 		'CRUD',
 		'DB',
 		'Debugger',
+		'Envconf',
 		'ExtendedModel',
 		'FileManager',
 		'Form',
